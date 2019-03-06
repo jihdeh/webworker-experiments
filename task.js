@@ -12,7 +12,7 @@ function randomize(size, type = url, radix = 48) {
 }
 
 //const for loop
-const number = 7000000; //70million, do not try this in production
+const number = 70000000; //70million, do not try this in production
 
 //@todo - generate randon usernames and emails with alphanumeric ids
 function dummymizeData() {
@@ -32,8 +32,7 @@ function beginOverload() {
   let count = 0
    while (count < number) {
   for (let i = 0; i < number; i++) {
-    console.log(count);
-    fetch("https://api.masterclasschioma.com/v1/user/add", {
+    fetch("yourapiendpoint", {
       method: "POST",
       cache: "no-cache",
       headers: {
