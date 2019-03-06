@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <p>Hello wicked</p>
+  <button onclick="startOverload()">Start computation</button>
+  <script type="text/javascript">
+    const worker = new Worker('task.js');
+
+    function startOverload() {
+      worker.postMessage({'cmd': 'overload', 'data': [1,2,3]})
+    }
+
+    worker.addEventListener('message', function(e) {
+    console.log(e.data);
+    // e.data.then((e) => console.log(e, 'as'))
+  }, false);
+  </script>
+</body>
+</html>
